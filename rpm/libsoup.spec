@@ -15,7 +15,6 @@ Group:      System/Libraries
 License:    LGPLv2
 URL:        http://live.gnome.org/LibSoup
 Source0:    http://download.gnome.org/sources/libsoup/2.38/%{name}-%{version}.tar.xz
-Source1:    gnome-autogen.sh
 Source100:  libsoup.yaml
 Patch0:     disable-gtk-doc.patch
 Requires:   glib-networking
@@ -26,6 +25,7 @@ BuildRequires:  pkgconfig(gnutls)
 BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  pkgconfig(sqlite3)
 BuildRequires:  glib-networking
+BuildRequires:  gnome-common
 
 %description
 Libsoup is an HTTP library implementation in C. It was originally part
@@ -59,10 +59,8 @@ you to develop applications that use the libsoup library.
 
 %build
 # >> build pre
-%__cp $RPM_SOURCE_DIR/gnome-autogen.sh .
-%__chmod 0755 gnome-autogen.sh
 echo "EXTRA_DIST = missing-gtk-doc" > gtk-doc.make
-USE_GNOME2_MACROS=1 NOCONFIGURE=1 ./gnome-autogen.sh
+USE_GNOME2_MACROS=1 NOCONFIGURE=1 gnome-autogen.sh
 # << build pre
 
 %configure --disable-static \

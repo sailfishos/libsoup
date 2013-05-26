@@ -7,7 +7,6 @@ License: LGPLv2
 URL: http://live.gnome.org/LibSoup
 Sources:
     - http://download.gnome.org/sources/libsoup/2.38/%{name}-%{version}.tar.xz
-    - gnome-autogen.sh
 Patches:
     - disable-gtk-doc.patch
 Description: |
@@ -23,6 +22,7 @@ Description: |
 
 PkgBR:
     - glib-networking
+    - gnome-common
 PkgConfigBR:
     - glib-2.0 >= 2.31.7
     - gnutls
