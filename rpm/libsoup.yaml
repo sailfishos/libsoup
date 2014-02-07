@@ -1,12 +1,12 @@
 Name: libsoup
 Summary: Soup, an HTTP library implementation
-Version: 2.38.1
+Version: 2.44.2
 Release: 1
 Group: System/Libraries
 License: LGPLv2
 URL: http://live.gnome.org/LibSoup
 Sources:
-    - http://download.gnome.org/sources/libsoup/2.38/%{name}-%{version}.tar.xz
+    - http://download.gnome.org/sources/libsoup/2.44/%{name}-%{version}.tar.xz
 Patches:
     - disable-gtk-doc.patch
 Description: |
@@ -23,8 +23,10 @@ Description: |
 PkgBR:
     - glib-networking
     - gnome-common
+    - intltool >= 0.25
+    - python
 PkgConfigBR:
-    - glib-2.0 >= 2.31.7
+    - glib-2.0 >= 2.36.0
     - gnutls
     - libxml-2.0
     - sqlite3
@@ -35,6 +37,8 @@ Configure: configure
 ConfigOptions:
     - --without-gnome
     - --disable-gtk-doc
+Files:
+    - "%{_datarootdir}/locale/*/LC_MESSAGES/*.mo"
 SubPackages:
     - Name: devel
       Summary: Header files for the Soup library
