@@ -18,6 +18,7 @@ Source0:    http://download.gnome.org/sources/libsoup/2.44/%{name}-%{version}.ta
 Source100:  libsoup.yaml
 Patch0:     disable-gtk-doc.patch
 Patch1:     force-proxy-port.patch
+Patch2:     new-socket-client-leak.patch
 Requires:   glib-networking
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -59,6 +60,8 @@ you to develop applications that use the libsoup library.
 %patch0 -p1
 # force-proxy-port.patch
 %patch1 -p1
+# new-socket-client-leak.patch
+%patch2 -p1
 # >> setup
 # << setup
 

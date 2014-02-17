@@ -10,6 +10,7 @@ Sources:
 Patches:
     - disable-gtk-doc.patch
     - force-proxy-port.patch
+    - new-socket-client-leak.patch
 Description: |
     Libsoup is an HTTP library implementation in C. It was originally part
     of a SOAP (Simple Object Access Protocol) implementation called Soup, but
