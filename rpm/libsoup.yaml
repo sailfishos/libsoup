@@ -9,6 +9,7 @@ Sources:
     - http://download.gnome.org/sources/libsoup/2.44/%{name}-%{version}.tar.xz
 Patches:
     - disable-gtk-doc.patch
+    - force-proxy-port.patch
 Description: |
     Libsoup is an HTTP library implementation in C. It was originally part
     of a SOAP (Simple Object Access Protocol) implementation called Soup, but

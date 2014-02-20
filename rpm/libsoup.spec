@@ -17,6 +17,7 @@ URL:        http://live.gnome.org/LibSoup
 Source0:    http://download.gnome.org/sources/libsoup/2.44/%{name}-%{version}.tar.xz
 Source100:  libsoup.yaml
 Patch0:     disable-gtk-doc.patch
+Patch1:     force-proxy-port.patch
 Requires:   glib-networking
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -56,6 +57,8 @@ you to develop applications that use the libsoup library.
 
 # disable-gtk-doc.patch
 %patch0 -p1
+# force-proxy-port.patch
+%patch1 -p1
 # >> setup
 # << setup
 
