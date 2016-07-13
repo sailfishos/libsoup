@@ -1,19 +1,17 @@
 Name:       libsoup
 
 Summary:    Soup, an HTTP library implementation
-Version:    2.44.2
+Version:    2.54.1
 Release:    1
 Group:      System/Libraries
 License:    LGPLv2
-URL:        http://live.gnome.org/LibSoup
-Source0:    http://download.gnome.org/sources/libsoup/2.44/%{name}-%{version}.tar.xz
+URL:        https://git.merproject.org/mer-core/libsoup
+Source0:    %{name}-%{version}.tar.xz
 Patch0:     disable-gtk-doc.patch
-Patch1:     force-proxy-port.patch
-Patch2:     new-socket-client-leak.patch
 Requires:   glib-networking
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
-BuildRequires:  pkgconfig(glib-2.0) >= 2.36.0
+BuildRequires:  pkgconfig(glib-2.0) >= 2.38.0
 BuildRequires:  pkgconfig(gnutls)
 BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  pkgconfig(sqlite3)
@@ -50,10 +48,6 @@ you to develop applications that use the libsoup library.
 
 # disable-gtk-doc.patch
 %patch0 -p1
-# force-proxy-port.patch
-%patch1 -p1
-# new-socket-client-leak.patch
-%patch2 -p1
 
 %build
 echo "EXTRA_DIST = missing-gtk-doc" > gtk-doc.make
@@ -61,7 +55,7 @@ USE_GNOME2_MACROS=1 NOCONFIGURE=1 gnome-autogen.sh
 
 %configure --disable-static \
     --without-gnome \
-    --disable-gtk-doc
+    --disable-vala
 
 make %{?_smp_mflags}
 

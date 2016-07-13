@@ -1,19 +1,17 @@
 diff --git a/configure.ac b/configure.ac
-index 4db8cd2..9015fd5 100644
+index afd089c..1d5fa31 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -146,7 +146,13 @@ AC_SUBST(HAVE_GNOME)
+@@ -157,9 +157,9 @@ dnl *** gtk-doc ***
  dnl ***************
- dnl *** gtk-doc ***
- dnl ***************
--GTK_DOC_CHECK([1.10])
-+AM_CONDITIONAL(ENABLE_GTK_DOC, test "x$enable_gtk_doc" = xyes)
-+AM_CONDITIONAL(DISABLE_GTK_DOC, test "x$disable_gtk_doc" = xno)
-+# Check for GTK_DOC_CHECK availability. The GTK_DOC_CHECK invocation
-+# must be on its own line, gtkdocize relies on it
-+m4_ifdef([GTK_DOC_CHECK], [
-+ GTK_DOC_CHECK([1.10])
-+])
+ # gtkdocize greps for ^GTK_DOC_CHECK and parses it, so you need to have
+ # it on it's own line.
+-m4_ifdef([GTK_DOC_CHECK], [
+-GTK_DOC_CHECK([1.20], [--flavour no-tmpl])
+-],[])
++#m4_ifdef([GTK_DOC_CHECK], [
++#GTK_DOC_CHECK([1.20], [--flavour no-tmpl])
++#],[])
  
  dnl *****************************
  dnl *** gobject-introspection ***
