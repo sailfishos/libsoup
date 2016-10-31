@@ -8,6 +8,7 @@ License:    LGPLv2
 URL:        https://git.merproject.org/mer-core/libsoup
 Source0:    %{name}-%{version}.tar.xz
 Patch0:     disable-gtk-doc.patch
+Patch1:     revert-constructor-init.patch
 Requires:   glib-networking
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -48,6 +49,7 @@ you to develop applications that use the libsoup library.
 
 # disable-gtk-doc.patch
 %patch0 -p1
+%patch1 -p1
 
 %build
 echo "EXTRA_DIST = missing-gtk-doc" > gtk-doc.make
