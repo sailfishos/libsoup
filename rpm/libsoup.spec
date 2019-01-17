@@ -44,6 +44,15 @@ Libsoup is an HTTP library implementation in C. This package allows
 you to develop applications that use the libsoup library.
 
 
+%package doc
+Summary:   Documentation for %{name}
+Group:     Documentation
+Requires:  %{name} = %{version}-%{release}
+
+%description doc
+%{summary}.
+
+
 %prep
 %setup -q -n %{name}-%{version}/libsoup
 
@@ -65,14 +74,18 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 %make_install
 
+mkdir -p %{buildroot}%{_docdir}/%{name}-%{version}
+install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
+        README NEWS AUTHORS
+
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
 %files
 %defattr(-,root,root,-)
+%license COPYING
 %{_datarootdir}/locale/*/LC_MESSAGES/*.mo
-%doc README COPYING NEWS AUTHORS
 %{_libdir}/lib*.so.*
 %{_libdir}/girepository-1.0/Soup*2.4.typelib
 
@@ -84,3 +97,6 @@ rm -rf %{buildroot}
 %{_libdir}/pkgconfig/*.pc
 %{_datadir}/gir-1.0/Soup*2.4.gir
 
+%files doc
+%defattr(-,root,root,-)
+%{_docdir}/%{name}-%{version}
