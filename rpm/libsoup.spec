@@ -18,6 +18,7 @@ BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  pkgconfig(sqlite3)
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  glib-networking
+BuildRequires:  gnome-common
 BuildRequires:  intltool >= 0.25
 
 %description
