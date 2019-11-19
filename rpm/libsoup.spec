@@ -1,25 +1,28 @@
 Name:       libsoup
 
 Summary:    Soup, an HTTP library implementation
-Version:    2.54.1
+Version:    2.68.2
 Release:    1
 Group:      System/Libraries
 License:    LGPLv2
 URL:        https://git.merproject.org/mer-core/libsoup
 Source0:    %{name}-%{version}.tar.xz
-Patch0:     disable-gtk-doc.patch
-Patch1:     revert-constructor-init.patch
+Patch0:     0001-fix-canonicalize-filename.patch
 Requires:   glib-networking
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(glib-2.0) >= 2.38.0
-BuildRequires:  pkgconfig(gnutls)
+BuildRequires:  pkgconfig(gobject-2.0)
+BuildRequires:  pkgconfig(gio-2.0)
 BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  pkgconfig(sqlite3)
+BuildRequires:  pkgconfig(libpsl)
+BuildRequires:  pkgconfig(zlib)
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  glib-networking
 BuildRequires:  gnome-common
 BuildRequires:  intltool >= 0.25
+BuildRequires:  meson
 
 %description
 Libsoup is an HTTP library implementation in C. It was originally part
@@ -32,7 +35,6 @@ on the network in a completely asynchronous fashion, very similar to
 the Gtk+ programming model (a synchronous operation mode is also
 supported for those who want it).
 
-
 %package devel
 Summary:    Header files for the Soup library
 Group:      Development/Libraries
@@ -42,7 +44,6 @@ Requires:   %{name} = %{version}-%{release}
 Libsoup is an HTTP library implementation in C. This package allows
 you to develop applications that use the libsoup library.
 
-
 %package doc
 Summary:   Documentation for %{name}
 Group:     Documentation
@@ -51,27 +52,21 @@ Requires:  %{name} = %{version}-%{release}
 %description doc
 %{summary}.
 
-
 %prep
 %setup -q -n %{name}-%{version}/libsoup
-
-# disable-gtk-doc.patch
 %patch0 -p1
-%patch1 -p1
 
 %build
-echo "EXTRA_DIST = missing-gtk-doc" > gtk-doc.make
-USE_GNOME2_MACROS=1 NOCONFIGURE=1 gnome-autogen.sh
+%meson -Dgssapi=disabled \
+       -Dntlm=disabled \
+       -Dbrotli=disabled \
+       -Dgnome=false \
+       -Dvapi=disabled
 
-%configure --disable-static \
-    --without-gnome \
-    --disable-vala
-
-make %{?_smp_mflags}
+%meson_build
 
 %install
-rm -rf %{buildroot}
-%make_install
+%meson_install
 
 mkdir -p %{buildroot}%{_docdir}/%{name}-%{version}
 install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
