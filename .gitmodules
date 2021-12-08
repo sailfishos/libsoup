@@ -1,3 +1,3 @@
 [submodule "libsoup"]
 	path = libsoup
-	url = https://git.sailfishos.org/mirror/libsoup.git
+	url = https://github.com/sailfishos-mirror/libsoup.git
