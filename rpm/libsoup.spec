@@ -1,11 +1,10 @@
 Name:       libsoup
 
 Summary:    Soup, an HTTP library implementation
-Version:    2.68.2
+Version:    2.74.3
 Release:    1
-Group:      System/Libraries
 License:    LGPLv2
-URL:        https://git.merproject.org/mer-core/libsoup
+URL:        https://github.com/sailfishos/libsoup
 Source0:    %{name}-%{version}.tar.xz
 Patch0:     0001-fix-canonicalize-filename.patch
 Requires:   glib-networking
@@ -20,8 +19,7 @@ BuildRequires:  pkgconfig(libpsl)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  glib-networking
-BuildRequires:  gnome-common
-BuildRequires:  intltool >= 0.25
+BuildRequires:  gettext
 BuildRequires:  meson
 
 %description
@@ -37,7 +35,6 @@ supported for those who want it).
 
 %package devel
 Summary:    Header files for the Soup library
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
@@ -46,7 +43,6 @@ you to develop applications that use the libsoup library.
 
 %package doc
 Summary:   Documentation for %{name}
-Group:     Documentation
 Requires:  %{name} = %{version}-%{release}
 
 %description doc
@@ -61,6 +57,7 @@ Requires:  %{name} = %{version}-%{release}
        -Dntlm=disabled \
        -Dbrotli=disabled \
        -Dgnome=false \
+       -Dsysprof=disabled \
        -Dvapi=disabled
 
 %meson_build
