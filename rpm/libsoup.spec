@@ -49,8 +49,7 @@ Requires:  %{name} = %{version}-%{release}
 %{summary}.
 
 %prep
-%setup -q -n %{name}-%{version}/libsoup
-%patch0 -p1
+%autosetup -p1 -n %{name}-%{version}/libsoup
 
 %build
 %meson -Dgssapi=disabled \
@@ -74,14 +73,12 @@ install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %license COPYING
 %{_datarootdir}/locale/*/LC_MESSAGES/*.mo
 %{_libdir}/lib*.so.*
 %{_libdir}/girepository-1.0/Soup*2.4.typelib
 
 %files devel
-%defattr(-,root,root,-)
 %dir %{_includedir}/libsoup-2.4
 %{_includedir}/libsoup-2.4/libsoup
 %{_libdir}/*.so
@@ -89,5 +86,4 @@ install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
 %{_datadir}/gir-1.0/Soup*2.4.gir
 
 %files doc
-%defattr(-,root,root,-)
 %{_docdir}/%{name}-%{version}
